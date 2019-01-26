@@ -1,23 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment (ionChange)="tagChanged($event)" scrollable color="dark">
+      <ion-segment-button *ngFor="let tag of tags" href="#dogs" [value]="tag">
+        <ion-label>{{tag}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment (ionChange)="brandChanged($event)" scrollable color="dark">
+      <ion-segment-button *ngFor="let brand of txTags[tag]" href="#dogs" [value]="brand">
+        <ion-label>{{brand}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
+  <ion-grid>
+    <ion-row align-items-center>
+      <ion-col *ngFor="let prod of prodsByBrand(prods[tag], brand)" size="4" no-padding>
+        <ion-card>
+          <ion-item>
+            {{prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
+          </ion-item>
+          <ion-card-subtitle>{{prod.descrip}}</ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-slides pager="false">
     <ion-slide #favsSlider *ngFor="let tag of tags">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-title>{{tag}}</ion-title>
-          </ion-col>
-        </ion-row>
-        <ion-row align-items-center>
-          <ion-col *ngFor="let prod of prods[tag]" size="4" no-padding>
-            <ion-card>
-              <ion-item>
-                {{prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
-              </ion-item>
-              <ion-card-subtitle>{{prod.descrip}}</ion-card-subtitle>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
     </ion-slide>
   </ion-slides>
 </ion-content>
