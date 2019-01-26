@@ -5,25 +5,29 @@ import { map } from 'rxjs/operators';
 
 import { environment as env } from '../../environments/environment';
 
+import { Prod, Clave, prods } from './prod';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProdsService {
-  prods: any[];
+  prods: Prod[];
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.prods = prods;
+  }
 
-  load(): Observable<any[]> {
+  load(): Observable<Prod[]> {
     // tslint:disable-next-line:curly
     if (this.prods) return of(this.prods);
     return this.http
-      .get<{ found: Number, prods: any[] }>(`${env.api.url}/prods`, {
+      .get<{ found: Number, prods: Prod[] }>(`${env.api.url}/prods`, {
         headers: { Authorization: `Bearer ${env.api.tokens.prods}` }
       })
       .pipe(map(this.process, this));
   }
 
-  process(data: { found: Number, prods: any[] }): any[] {
+  process(data: { found: Number, prods: Prod[] }): Prod[] {
     return data.prods.map(prod => ({
       ...prod,
       // TODO: buena aproximación, pero sería mejor un ranking devuelto por el API
