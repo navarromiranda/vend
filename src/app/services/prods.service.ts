@@ -14,17 +14,26 @@ export class ProdsService {
   prods: Prod[];
 
   constructor(public http: HttpClient) {
-    this.prods = prods;
+    const localStorageProds = localStorage.getItem('prods') || '[]';
+    const localProds = JSON.parse(localStorageProds);
+
+    this.prods = (localProds.length >= prods.length) ? localProds : prods;
+    localStorage.setItem('prods', JSON.stringify(this.prods));
   }
 
   load(): Observable<Prod[]> {
-    // tslint:disable-next-line:curly
-    if (this.prods) return of(this.prods);
-    return this.http
+
+    const httpProds = this.http
       .get<{ found: Number, prods: Prod[] }>(`${env.api.url}/prods`, {
         headers: { Authorization: `Bearer ${env.api.tokens.prods}` }
       })
-      .pipe(map(this.process, this));
+      .pipe(map(this.process, this))
+      .subscribe(_prods => {
+        localStorage.setItem('prods', JSON.stringify(_prods));
+        this.prods = _prods;
+      });
+
+    return of(this.prods);
   }
 
   process(data: { found: Number, prods: Prod[] }): Prod[] {
