@@ -36,6 +36,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'ticket',
+        children: [
+          {
+            path: '',
+            loadChildren: '../ticket/ticket.module#TicketPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/favs',
         pathMatch: 'full'

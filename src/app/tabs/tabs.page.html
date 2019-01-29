@@ -11,6 +11,13 @@
       <ion-label>Buscar</ion-label>
     </ion-tab-button>
 
+    <ion-tab-button tab="ticket">
+      <ion-label>
+        <p>{{Tickets.getNewTicketQty()}}</p>
+        <h2>{{Tickets.getNewTicketTotal() | currency:'MXN':'symbol-narrow':'1.2-2'}}</h2>
+      </ion-label>
+    </ion-tab-button>
+
     <ion-tab-button tab="tickets">
       <ion-icon name="filing"></ion-icon>
       <ion-label>Tickets</ion-label>
