@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment as env } from '../../environments/environment';
 
-import { Prod, Clave, prods } from './prod';
+import { Prod } from './prod';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ProdsService {
     const localStorageProds = localStorage.getItem('prods') || '[]';
     const localProds = JSON.parse(localStorageProds);
 
-    this.prods = (localProds.length >= prods.length) ? localProds : prods;
+    this.prods = localProds.sort((a, b) => a.descrip.length - b.descrip.length);
     localStorage.setItem('prods', JSON.stringify(this.prods));
   }
 
@@ -30,7 +30,7 @@ export class ProdsService {
       .pipe(map(this.process, this))
       .subscribe(_prods => {
         localStorage.setItem('prods', JSON.stringify(_prods));
-        this.prods = _prods;
+        this.prods = _prods.sort((a, b) => a.descrip.length - b.descrip.length);
       });
 
     return of(this.prods);
