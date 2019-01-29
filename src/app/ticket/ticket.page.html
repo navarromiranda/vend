@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let row of Tickets.newTicket | keyvalue">
+      <ion-item>
+        <ion-text slot="start">
+          {{row.value}}
+        </ion-text>
+
+        <ion-label>
+          <h3>{{ row.key.descrip }}</h3>
+          <p>{{ row.key.articulo }}</p>
+        </ion-label>
+
+        <ion-text slot="end" text-end>
+          <small>{{row.key.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}</small><br />
+          {{row.value * row.key.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
+        </ion-text>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="minusOne(row.key)" color="ligth">
+          <ion-icon slot="icon-only" name="remove-circle" color="primary"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="ligth">
+          {{row.value}}
+        </ion-item-option>
+        <ion-item-option (click)="plusOne(row.key)" color="ligth">
+          <ion-icon slot="icon-only" name="add-circle" color="success"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
