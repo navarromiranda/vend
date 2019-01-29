@@ -25,9 +25,12 @@
       <ion-col *ngFor="let prod of prodsByBrand(prods[tag], brand)">
         <ion-card (click)=prodClicked(prod) no-margin>
           <ion-card-header>
-            <ion-card-title>{{prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}</ion-card-title>
+            <ion-card-title>
+              <span>{{prod.precio | number:'1.2-2'}} </span>
+              <ion-badge color="success">{{Tickets.newTicket.get(prod)}}</ion-badge>
+            </ion-card-title>
           </ion-card-header>
-          <ion-card-content>{{prod.descrip}}</ion-card-content>
+          <ion-card-content>{{prod.descrip}} </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
