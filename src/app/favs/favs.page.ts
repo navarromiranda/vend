@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProdsService } from '../services/prods.service';
+import { TicketsService } from '../services/tickets.service';
 import { Prod } from '../services/prod';
 
 @Component({
@@ -15,8 +16,8 @@ export class FavsPage {
 
   txTags = {};
 
-  constructor(public Prods: ProdsService) {
-    const fakeEvent = { target: { complete: () => { } } }
+  constructor(public Prods: ProdsService, public Tickets: TicketsService) {
+    const fakeEvent = { target: { complete: () => { } } };
     this.doRefresh(fakeEvent);
   }
 
@@ -57,5 +58,9 @@ export class FavsPage {
           event.target.complete();
         });
       });
+  }
+
+  prodClicked(prod) {
+    this.Tickets.addProdToTicket(prod);
   }
 }

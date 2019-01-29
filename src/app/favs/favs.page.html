@@ -23,7 +23,7 @@
   <ion-grid>
     <ion-row align-items-center>
       <ion-col *ngFor="let prod of prodsByBrand(prods[tag], brand)" size="4" no-padding>
-        <ion-card>
+        <ion-card (click)=prodClicked(prod)>
           <ion-item>
             {{prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
           </ion-item>
