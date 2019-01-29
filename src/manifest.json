@@ -2,9 +2,10 @@
   "name": "Vend",
   "short_name": "Vend",
   "description": "Precios de la dulcería",
-  "theme_color": "#fafafa",
-  "background_color": "#1976d2",
+  "theme_color": "#1c8adb",
+  "background_color": "#176094",
   "display": "fullscreen",
+  "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "icons": [
