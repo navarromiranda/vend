@@ -8,11 +8,11 @@
   <ion-list>
     <ion-item-sliding *ngFor="let row of Tickets.newTicket | keyvalue">
       <ion-item>
-        <ion-text slot="start">
+        <ion-text slot="start" (click)="minusOne(row.key)">
           {{row.value}}
         </ion-text>
 
-        <ion-label>
+        <ion-label (click)="plusOne(row.key)">
           <h3>{{ row.key.descrip }}</h3>
           <p>{{ row.key.articulo }}</p>
         </ion-label>
