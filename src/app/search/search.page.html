@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Lista de productos
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Mostrando {{filteredItems.length}} artículos</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar debounce="150" search-icon="barcode" placeholder="Escribe artículo o código" [(ngModel)]="searchTerm"
+      (ionChange)="searchEvent(searchTerm)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of filteredItems" (click)="prodClicked(item)" lines="none">
+
+      <ion-label>
+        <h3>{{ item.descrip }}</h3>
+        <p *ngIf="0 < item.articulo">{{ item.articulo }}</p>
+      </ion-label>
+
+      <ion-text slot="end">
+        <ion-badge color="warning">{{Tickets.newTicket.get(item)}}</ion-badge>
+      </ion-text>
+      <ion-text slot="end" text-end>
+        {{item.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>
