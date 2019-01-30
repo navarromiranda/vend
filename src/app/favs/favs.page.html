@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-toolbar color="medium">
-    <ion-segment (ionChange)="tagChanged($event)" scrollable color="dark">
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="tagChanged($event)" scrollable color="light">
       <ion-segment-button *ngFor="let tag of tags" [value]="tag">
         <ion-label color="light">{{tag}}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
-  <ion-toolbar color="medium">
-    <ion-segment (ionChange)="brandChanged($event)" scrollable color="dark">
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="brandChanged($event)" scrollable color="light">
       <ion-segment-button *ngFor="let brand of txTags[tag]" [value]="brand">
         <ion-label color="light">{{brand}}</ion-label>
       </ion-segment-button>
@@ -24,12 +24,14 @@
     <ion-row align-items-center>
       <ion-col *ngFor="let prod of prodsByBrand(prods[tag], brand)">
         <ion-card (click)=prodClicked(prod) no-margin>
-          <ion-card-header>
-            <ion-card-title>
-              <span>{{prod.precio | number:'1.2-2'}} </span>
-              <ion-badge color="success">{{Tickets.newTicket.get(prod)}}</ion-badge>
-            </ion-card-title>
-          </ion-card-header>
+
+          <ion-item lines="none" color="light" no-pading no-margin>
+            <ion-text color="dark" no-pading no-margin>
+              <h3 color="primary" no-pading no-margin>{{prod.precio | number:'1.2-2'}}</h3>
+            </ion-text>
+            <ion-badge slot="end" color="warning" no-pading no-margin>{{Tickets.newTicket.get(prod)}}</ion-badge>
+          </ion-item>
+
           <ion-card-content>{{prod.descrip}} </ion-card-content>
         </ion-card>
       </ion-col>
