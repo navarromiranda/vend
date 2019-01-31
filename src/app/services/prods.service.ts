@@ -40,7 +40,7 @@ export class ProdsService {
     return data.prods.map(prod => ({
       ...prod,
       // TODO: buena aproximación, pero sería mejor un ranking devuelto por el API
-      fav: prod.linea !== 'SYS'
+      fav: !(prod.linea === 'SYS' && prod.marca === 'SYS')
     }));
   }
 
