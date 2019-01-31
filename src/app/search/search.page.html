@@ -18,7 +18,7 @@
       </ion-label>
 
       <ion-text slot="end">
-        <ion-badge color="warning">{{Tickets.newTicket.get(item)}}</ion-badge>
+        <ion-badge color="warning">{{Tickets.getProdQtyOnTicket(item)}}</ion-badge>
       </ion-text>
       <ion-text slot="end" text-end>
         {{item.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}

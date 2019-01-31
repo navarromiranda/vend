@@ -29,7 +29,7 @@
             <ion-text color="dark" no-pading no-margin>
               <h3 color="primary" no-pading no-margin>{{prod.precio | number:'1.2-2'}}</h3>
             </ion-text>
-            <ion-badge slot="end" color="warning" no-pading no-margin>{{Tickets.newTicket.get(prod)}}</ion-badge>
+            <ion-badge slot="end" color="warning" no-pading no-margin>{{Tickets.getProdQtyOnTicket(prod)}}</ion-badge>
           </ion-item>
 
           <ion-card-content>{{prod.descrip}} </ion-card-content>
