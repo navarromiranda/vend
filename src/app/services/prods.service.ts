@@ -15,7 +15,7 @@ export class ProdsService {
 
   constructor(public http: HttpClient) {
     const localStorageProds = localStorage.getItem('prods') || '[]';
-    const localProds = JSON.parse(localStorageProds);
+    const localProds: Prod[] = JSON.parse(localStorageProds);
 
     this.prods = localProds.sort((a, b) => a.descrip.length - b.descrip.length);
     localStorage.setItem('prods', JSON.stringify(this.prods));
