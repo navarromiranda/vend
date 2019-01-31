@@ -40,7 +40,9 @@ export class FavsPage {
   doRefresh(event) {
     // Obtengo todos los Prods
     this.Prods.load()
-      .subscribe(prods => {
+      .subscribe(_prods => {
+        // Me quedo sólo con los prod que sean fav.
+        const prods = _prods.filter(prod => prod.fav)
         // Obtengo la lista ordenada de líneas
         const sortedTags = prods.map(p => p.linea).sort();
         this.tags = new Set(sortedTags);
