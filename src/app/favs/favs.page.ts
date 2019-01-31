@@ -24,7 +24,12 @@ export class FavsPage {
   tagChanged(ev: any) {
     const value = ev.detail.value;
     this.tag = value;
-    this.brand = undefined;
+
+    if (this.prods[this.tag].length > 24) {
+      this.brand = [...this.txTags[this.tag]][0];
+    } else {
+      this.brand = undefined;
+    }
   }
 
   brandChanged(ev: any) {
@@ -42,7 +47,7 @@ export class FavsPage {
     this.Prods.load()
       .subscribe(_prods => {
         // Me quedo sólo con los prod que sean fav.
-        const prods = _prods.filter(prod => prod.fav)
+        const prods = _prods.filter(prod => prod.fav);
         // Obtengo la lista ordenada de líneas
         const sortedTags = prods.map(p => p.linea).sort();
         this.tags = new Set(sortedTags);
@@ -59,6 +64,7 @@ export class FavsPage {
           this.txTags[tag] = new Set(marcas);
           event.target.complete();
         });
+        this.tagChanged({ detail: { value: this.tag } });
       });
   }
 

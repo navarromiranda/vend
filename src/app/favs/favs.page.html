@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-segment (ionChange)="tagChanged($event)" scrollable color="light">
+    <ion-segment [ngModel]="tag" (ionChange)="tagChanged($event)" scrollable color="light">
       <ion-segment-button *ngFor="let tag of tags" [value]="tag">
         <ion-label color="light">{{tag}}</ion-label>
       </ion-segment-button>
@@ -8,7 +8,7 @@
   </ion-toolbar>
 
   <ion-toolbar color="primary">
-    <ion-segment (ionChange)="brandChanged($event)" scrollable color="light">
+    <ion-segment [ngModel]="brand" (ionChange)="brandChanged($event)" scrollable color="light">
       <ion-segment-button *ngFor="let brand of txTags[tag]" [value]="brand">
         <ion-label color="light">{{brand}}</ion-label>
       </ion-segment-button>
