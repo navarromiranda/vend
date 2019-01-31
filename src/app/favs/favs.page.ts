@@ -64,7 +64,9 @@ export class FavsPage {
           this.txTags[tag] = new Set(marcas);
           event.target.complete();
         });
-        this.tagChanged({ detail: { value: this.tag } });
+        if (!this.brand) {
+          this.tagChanged({ detail: { value: this.tag } });
+        }
       });
   }
 
