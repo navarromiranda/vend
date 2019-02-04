@@ -20,6 +20,7 @@ export class Prod {
         public impuesto: string,
         public linea: string,
         public marca: string,
+        public movs: number,
         public precio: number
     ) { }
 }
