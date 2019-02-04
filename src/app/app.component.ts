@@ -10,7 +10,7 @@ import { VERSION } from 'src/environments/version';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  version = `${VERSION.semver.raw}+${VERSION.distance}`;
+  version = `${VERSION.version}+${VERSION.hash}`;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -18,6 +18,10 @@ export class AppComponent {
     private toast: ToastController
   ) {
     this.initializeApp();
+
+    if (VERSION.semver) {
+      this.version = `${VERSION.semver.raw}+${VERSION.distance}`;
+    }
   }
 
   initializeApp() {
