@@ -25,7 +25,7 @@ export class FavsPage {
     const value = ev.detail.value;
     this.tag = value;
 
-    if (this.prods[this.tag].length > 24) {
+    if (this.prods[this.tag].length > 69) {
       this.brand = [...this.txTags[this.tag]][0];
     } else {
       this.brand = undefined;
