@@ -4,7 +4,7 @@
   "description": "Precios de la dulcería",
   "theme_color": "#1c8adb",
   "background_color": "#176094",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
