@@ -44,3 +44,29 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark" *ngIf="searchTerm && searchTerm.length >= 4 && filteredItems.length > 0">
+    <ion-list>
+      <ion-item *ngFor="let item of filteredItems.slice(0,5)" (click)="prodClicked(item)" lines="none">
+        <ion-label>
+          <h3>{{ item.descrip }}</h3>
+          <p *ngIf="0 < item.articulo">{{ item.articulo }}</p>
+        </ion-label>
+
+        <ion-text slot="end" text-end>
+          {{item.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
+        </ion-text>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar debounce="150" search-icon="barcode" placeholder="Ingresa código" [(ngModel)]="searchTerm"
+      (ionChange)="searchEvent(searchTerm)"></ion-searchbar>
+    <ion-buttons slot="primary">
+      <ion-button color="success">
+        <ion-title>{{Tickets.getNewTicketTotal() | currency:'MXN':'symbol-narrow':'1.2-2'}}</ion-title>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
