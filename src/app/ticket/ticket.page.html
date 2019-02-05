@@ -1,4 +1,18 @@
 <ion-content padding>
+  <ion-card *ngIf="Tickets.newTicket.size == 0">
+    <ion-card-header>
+      <ion-card-subtitle>No hay productos en el ticket</ion-card-subtitle>
+    </ion-card-header>
+    <ion-item lines="none">
+      <ion-icon name="list" slot="start"></ion-icon>
+      <ion-title>Ticket vacío</ion-title>
+    </ion-item>
+
+    <ion-card-content>
+      Usa la búsqueda o los favoritos para agregar artículos al ticket.
+    </ion-card-content>
+  </ion-card>
+
   <ion-list>
     <ion-item-sliding *ngFor="let row of Tickets.newTicket | keyvalue">
       <ion-item>
