@@ -1,0 +1,15 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: registry.gitlab.com/ignys/rabbit/dockerfiles/ionic
+  script:
+    - npm install
+    - mkdir www
+    - ionic cordova build --prod --release android
+    - jarsigner -verbose -keystore vend.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk vend -storepass $STOREPASS
+    - zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk vend.apk
+  artifacts:
+    paths:
+      - vend.apk
