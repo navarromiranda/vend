@@ -3,3 +3,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build]
+  # Default publish dir.
+  publish = "www"
+  # Default build command.
+  command = "node src/version.js; ng run app:build:production --service-worker; cp -r _well-known www/.well-known"

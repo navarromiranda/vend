@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "mx.navarromiranda.vend",
+      "sha256_cert_fingerprints": [
+        "90:7B:33:7E:26:33:4E:7C:1A:05:32:93:30:F5:F9:84:82:88:82:DE:45:BA:DC:9B:88:6B:01:96:AD:A2:49:00"
+      ]
+    }
+  }
+]
