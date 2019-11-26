@@ -4,6 +4,8 @@ stages:
 build:
   stage: build
   image: registry.gitlab.com/ignys/rabbit/dockerfiles/ionic
+  variables:
+    STOREPASS: configure_me_at_ci_store
   script:
     - npm install
     - mkdir www
