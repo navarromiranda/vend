@@ -14,30 +14,30 @@
   </ion-card>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let row of Tickets.newTicket | keyvalue">
+    <ion-item-sliding *ngFor="let row of Tickets.newTicket.values()">
       <ion-item>
-        <ion-text slot="start" (click)="minusOne(row.value.prod)">
-          {{row.value.qty}}
+        <ion-text slot="start" (click)="minusOne(row.prod)">
+          {{row.qty}}
         </ion-text>
 
-        <ion-label (click)="plusOne(row.value.prod)">
-          <h3>{{ row.value.prod.descrip }}</h3>
-          <p *ngIf="0 < row.value.prod.articulo">{{ row.value.prod.articulo }}</p>
+        <ion-label (click)="plusOne(row.prod)">
+          <h3>{{ row.prod.descrip }}</h3>
+          <p *ngIf="0 < row.prod.articulo">{{ row.prod.articulo }}</p>
         </ion-label>
 
         <ion-text slot="end" text-end>
-          <small>{{row.value.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}</small><br />
-          {{row.value.qty * row.value.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
+          <small>{{row.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}</small><br />
+          {{row.qty * row.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
         </ion-text>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="minusOne(row.value.prod)" color="ligth">
+        <ion-item-option (click)="minusOne(row.prod)" color="ligth">
           <ion-icon slot="icon-only" name="remove-circle" color="primary"></ion-icon>
         </ion-item-option>
         <ion-item-option color="ligth">
-          {{row.value.qty}}
+          {{row.qty}}
         </ion-item-option>
-        <ion-item-option (click)="plusOne(row.value.prod)" color="ligth">
+        <ion-item-option (click)="plusOne(row.prod)" color="ligth">
           <ion-icon slot="icon-only" name="add-circle" color="success"></ion-icon>
         </ion-item-option>
       </ion-item-options>
