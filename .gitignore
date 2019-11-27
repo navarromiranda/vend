@@ -34,3 +34,16 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 src/environments/version.ts
+
+/.idea
+/.ionic
+/.sass-cache
+/.sourcemaps
+/.versions
+/.vscode
+/coverage
+/dist
+/node_modules
+/platforms
+/plugins
+/www

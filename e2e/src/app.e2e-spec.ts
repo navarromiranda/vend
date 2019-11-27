@@ -7,8 +7,8 @@ describe('new App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should be blank', () => {
     page.navigateTo();
-    expect(page.getPageTitle()).toContain('Favoritos');
+    expect(page.getParagraphText()).toContain('No hay productos en el ticket');
   });
 });

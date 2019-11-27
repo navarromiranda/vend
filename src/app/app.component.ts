@@ -7,7 +7,8 @@ import { VERSION } from 'src/environments/version';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
   version = `${VERSION.version}+${VERSION.hash}`;
@@ -22,7 +23,7 @@ export class AppComponent {
     if (VERSION.semver) {
       this.version = `${VERSION.semver.raw}+${VERSION.distance}`;
     }
-  }
+}
 
   initializeApp() {
     this.platform.ready().then(() => {
