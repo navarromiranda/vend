@@ -4,6 +4,7 @@ import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { VERSION } from 'src/environments/version';
+import { ProdsService } from './services/prods.service';
 
 @Component({
   selector: 'app-root',
@@ -16,20 +17,22 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private toast: ToastController
+    private toast: ToastController,
+    private Prods: ProdsService
   ) {
     this.initializeApp();
 
     if (VERSION.semver) {
       this.version = `${VERSION.semver.raw}+${VERSION.distance}`;
     }
-}
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.presentToast();
+      this.Prods.load().subscribe();
     });
   }
 
