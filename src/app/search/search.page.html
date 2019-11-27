@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-list>
     <ion-item *ngFor="let item of filteredItems" (click)="prodClicked(item)" lines="none">
 
@@ -20,7 +20,7 @@
       <ion-text slot="end">
         <ion-badge color="warning">{{Tickets.getProdQtyOnTicket(item)}}</ion-badge>
       </ion-text>
-      <ion-text slot="end" text-end>
+      <ion-text slot="end" class="ion-text-end">
         {{item.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
       </ion-text>
     </ion-item>

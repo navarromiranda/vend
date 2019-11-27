@@ -1,4 +1,4 @@
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-card *ngIf="Tickets.newTicket.size == 0">
     <ion-card-header>
       <ion-card-subtitle>No hay productos en el ticket</ion-card-subtitle>
@@ -25,7 +25,7 @@
           <p *ngIf="0 < row.prod.articulo">{{ row.prod.articulo }}</p>
         </ion-label>
 
-        <ion-text slot="end" text-end>
+        <ion-text slot="end" class="ion-text-end">
           <small>{{row.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}</small><br />
           {{row.qty * row.prod.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
         </ion-text>
@@ -54,7 +54,7 @@
           <p *ngIf="0 < item.articulo">{{ item.articulo }}</p>
         </ion-label>
 
-        <ion-text slot="end" text-end>
+        <ion-text slot="end" class="ion-text-end">
           {{item.precio | currency:'MXN':'symbol-narrow':'1.2-2'}}
         </ion-text>
       </ion-item>
