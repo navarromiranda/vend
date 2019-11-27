@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content>
   <ion-card *ngIf="Tickets.newTicket.size == 0">
     <ion-card-header>
       <ion-card-subtitle>No hay productos en el ticket</ion-card-subtitle>
@@ -13,9 +13,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let row of Tickets.newTicket.values()">
-      <ion-item>
+  <ion-list lines="none" no-padding>
+    <ion-item-sliding *ngFor="let row of Tickets.newTicket.values(); index as i">
+      <ion-item [color]="i % 2 === 0 ? 'medium': 'ligth'">
         <ion-text slot="start" (click)="minusOne(row.prod)">
           {{row.qty}}
         </ion-text>
@@ -47,8 +47,8 @@
 
 <ion-footer>
   <ion-toolbar color="dark" *ngIf="searchTerm && searchTerm.length >= 4 && filteredItems.length > 0">
-    <ion-list>
-      <ion-item *ngFor="let item of filteredItems.slice(0,5)" (click)="prodClicked(item)" lines="none">
+    <ion-list no-padding>
+      <ion-item color="dark" *ngFor="let item of filteredItems.slice(0,5)" (click)="prodClicked(item)">
         <ion-label>
           <h3>{{ item.descrip }}</h3>
           <p *ngIf="0 < item.articulo">{{ item.articulo }}</p>
