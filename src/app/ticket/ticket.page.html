@@ -15,12 +15,12 @@
 
   <ion-list lines="none" no-padding>
     <ion-item-sliding *ngFor="let row of Tickets.newTicket.values(); index as i">
-      <ion-item [color]="i % 2 === 0 ? 'medium': 'ligth'">
+      <ion-item [color]="i % 2 === 0 ? 'medium': 'ligth'" button (click)="plusOne(row.prod)">
         <ion-text slot="start" (click)="minusOne(row.prod)">
           {{row.qty}}
         </ion-text>
 
-        <ion-label (click)="plusOne(row.prod)">
+        <ion-label>
           <h3>{{ row.prod.descrip }}</h3>
           <p *ngIf="0 < row.prod.articulo">{{ row.prod.articulo }}</p>
         </ion-label>
