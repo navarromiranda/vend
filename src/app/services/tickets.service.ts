@@ -55,4 +55,8 @@ export class TicketsService {
     return qty;
   }
 
+  clear(): void {
+    this.newTicket.clear();
+  }
+
 }

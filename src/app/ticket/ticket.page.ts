@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TicketsService } from '../services/tickets.service';
+import { ModalController } from '@ionic/angular';
 import { Prod } from '../models/prod';
 import { ProdsService } from '../services/prods.service';
+import { TicketsService } from '../services/tickets.service';
+import { PrintModalPage } from './print-modal/print-modal.page';
+
 
 @Component({
   selector: 'app-ticket',
@@ -12,7 +15,21 @@ export class TicketPage implements OnInit {
   filteredItems = [];
   searchTerm = '';
 
-  constructor(public Tickets: TicketsService, public Prods: ProdsService) { }
+  constructor(
+    public Modal: ModalController,
+    public Tickets: TicketsService,
+    public Prods: ProdsService,
+  ) { }
+
+  async paymentModal() {
+    const modal = await this.Modal.create({
+      component: PrintModalPage,
+      componentProps: {
+        ticket: this.Tickets.newTicket
+      }
+    });
+    return await modal.present();
+  }
 
   minusOne(prod: Prod): void {
     this.Tickets.minusOneProdToTicket(prod);

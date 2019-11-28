@@ -64,7 +64,7 @@
     <ion-searchbar debounce="150" search-icon="barcode" placeholder="Ingresa código" [(ngModel)]="searchTerm"
       (ionChange)="searchEvent(searchTerm)"></ion-searchbar>
     <ion-buttons slot="primary">
-      <ion-button color="success">
+      <ion-button color="success" (click)="paymentModal()">
         <ion-title>{{Tickets.getNewTicketTotal() | currency:'MXN':'symbol-narrow':'1.2-2'}}</ion-title>
       </ion-button>
     </ion-buttons>

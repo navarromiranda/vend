@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
+import { PrintModalPageModule } from './ticket/print-modal/print-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    PrintModalPageModule
   ],
   providers: [
     StatusBar,
