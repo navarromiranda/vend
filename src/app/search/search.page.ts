@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdsService } from '../services/prods.service';
-import { Prod } from '../services/prod';
+import { Prod } from '../models/prod';
 import { TicketsService } from '../services/tickets.service';
 import { count } from 'rxjs/operators';
 

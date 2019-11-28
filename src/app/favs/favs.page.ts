@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProdsService } from '../services/prods.service';
 import { TicketsService } from '../services/tickets.service';
-import { Prod } from '../services/prod';
+import { Prod } from '../models/prod';
 
 @Component({
   selector: 'app-favs',

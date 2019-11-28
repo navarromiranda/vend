@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Prod, Clave } from './prod';
-
-interface ITicketrow {
-  prod: Prod;
-  qty: number;
-}
+import { Prod, Clave } from '../models/prod';
+import { ITicketrow } from '../models/ITicketrow';
 
 @Injectable({
   providedIn: 'root'

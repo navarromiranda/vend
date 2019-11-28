@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment as env } from '../../environments/environment';
 
-import { Prod } from './prod';
+import { Prod } from '../models/prod';
 
 @Injectable({
   providedIn: 'root'
