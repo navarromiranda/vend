@@ -1,17 +1,20 @@
 <ion-header>
   <ion-toolbar color="">
     <ion-buttons slot="start">
-      <ion-button (click)="dismiss()">
+      <ion-button (click)="dismiss()" fill="outline" color="danger">
         <ion-icon slot="icon-only" name="close" color="danger"></ion-icon>
       </ion-button>
+      <ion-button *ngIf="!printed && Tickets.getNewTicketQty() > 0" color="danger" (click)="clearAndBack()">
+        <ion-icon slot="start" name="trash"></ion-icon>
+        borrar
+      </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end" *ngIf="pago >= Tickets.getNewTicketTotal()">
+    <ion-buttons slot="end" *ngIf="pago >= Tickets.getNewTicketTotal() && Tickets.getNewTicketQty() > 0">
       <ion-button color="primary" fill="outline" (click)="print()">
         <ion-icon slot="end" name="print"></ion-icon>
         imprimir
       </ion-button>
     </ion-buttons>
-    <ion-title>Finalizar venta</ion-title>
   </ion-toolbar>
 </ion-header>
 
