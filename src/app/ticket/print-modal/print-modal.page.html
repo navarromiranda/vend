@@ -19,75 +19,86 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>{{Tickets.getNewTicketQty()}} artículos</ion-card-subtitle>
-      <ion-card-title>Cobrar ${{Tickets.getNewTicketTotal()}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Configuración</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines="none">
+              <ion-item>
+                <ion-label>Impresora</ion-label>
+                <ion-select placeholder="Elige una" [(ngModel)]="printer" (ionChange)="onPrinterSelection()">
+                  <ion-select-option value="02:2F:57:22:26:8B">Azul</ion-select-option>
+                  <ion-select-option value="02:3E:51:78:C4:87">Naranja</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Cobrar {{Tickets.getNewTicketQty()}} artículos</ion-card-subtitle>
+            <ion-card-title>{{Tickets.getNewTicketTotal() | currency:'MXN':'symbol-narrow':'1.2-2'}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card *ngIf="!pago || Tickets.getNewTicketTotal() > pago" color="danger">
+          <ion-card-header>
+            <ion-card-subtitle>Faltan</ion-card-subtitle>
+            <ion-card-title>
+              {{Tickets.getNewTicketTotal() - (pago || 0) | currency:'MXN':'symbol-narrow':'1.2-2'}}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
 
-  <ion-card *ngIf="!pago || Tickets.getNewTicketTotal() > pago" color="danger">
-    <ion-card-header>
-      <ion-card-subtitle>Faltan</ion-card-subtitle>
-      <ion-card-title>
-        ${{Tickets.getNewTicketTotal() - (pago || 0)}}
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
+        <ion-card *ngIf="Tickets.getNewTicketTotal() === pago">
+          <ion-card-header>
+            <ion-card-subtitle>Sin cambio</ion-card-subtitle>
+            <ion-card-title>
+              Pago exacto
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
 
-  <ion-card *ngIf="Tickets.getNewTicketTotal() === pago">
-    <ion-card-header>
-      <ion-card-subtitle>Sin cambio</ion-card-subtitle>
-      <ion-card-title>
-        Pago exacto
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
+        <ion-card *ngIf="pago > Tickets.getNewTicketTotal()" color="success">
+          <ion-card-header>
+            <ion-card-subtitle>Cambio</ion-card-subtitle>
+            <ion-card-title>
+              {{pago - Tickets.getNewTicketTotal() | currency:'MXN':'symbol-narrow':'1.2-2'}}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Ingresa el pago</ion-card-subtitle>
+            <ion-card-title>
+              Ingresa el pago
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-input type="number" inputmode="decimal" [(ngModel)]="pago" clear-on-edit="true" size="large">
+              </ion-input>
+              <ion-icon name="cash" slot="end" size="large" color="success"></ion-icon>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
 
-  <ion-card *ngIf="pago > Tickets.getNewTicketTotal()" color="success">
-    <ion-card-header>
-      <ion-card-subtitle>Cambio</ion-card-subtitle>
-      <ion-card-title>
-        ${{pago - Tickets.getNewTicketTotal()}}
-      </ion-card-title>
-    </ion-card-header>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Ingresa el pago</ion-card-subtitle>
-      <ion-card-title>
-        Ingresa el pago
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-input type="number" inputmode="decimal" [(ngModel)]="pago" clear-on-edit="true" size="large">
-        </ion-input>
-        <ion-icon name="cash" slot="end" size="large" color="success"></ion-icon>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Configuración</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-
-      <ion-list lines="none">
-        <ion-item>
-          <ion-label>Impresora</ion-label>
-          <ion-select placeholder="Elige una" [(ngModel)]="printer" (ionChange)="onPrinterSelection()">
-            <ion-select-option value="02:2F:57:22:26:8B">Azul</ion-select-option>
-            <ion-select-option value="02:3E:51:78:C4:87">Naranja</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-
-    </ion-card-content>
-  </ion-card>
-
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
