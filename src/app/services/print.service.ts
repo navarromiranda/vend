@@ -76,14 +76,17 @@ export class PrintService {
     await this.row(`${piezas.padStart(piezasPad)}${TOTAL}${total}`);
 
     if (Number(pago) > Number(total)) {
-      const pagoPad = pago.toFixed(totalDecimals).length;
-      const TUPAGOPad = 31 - piezasPad - pagoPad;
-      const TUPAGO = this.pad('TU PAGO:', TUPAGOPad)
+      const PAGO = pago.toFixed(totalDecimals)
+      const CAMBIO = (pago - Number(total)).toFixed(totalDecimals)
 
-      await this.row(`${piezas.padStart(piezasPad)}${TUPAGO}${pago.toFixed(totalDecimals)}`);
-      await this.row(''.padEnd(piezasPad, '_') + ''.padEnd(TUPAGOPad) + ''.padEnd(pago.toFixed(totalDecimals).length, '_'));
+      const cambioPad = Math.max(PAGO.length, CAMBIO.length)
 
-      await this.row(`${piezas.padStart(piezasPad)} CAMBIO:${(pago - Number(total)).toFixed(totalDecimals)}`);
+      const TUPAGO = this.pad('TU PAGO:', 31 - cambioPad)
+      const TUCAMBIO = this.pad(' CAMBIO:', 31 - cambioPad)
+
+      await this.row('');
+      await this.row(TUPAGO + PAGO.padStart(cambioPad));
+      await this.row(TUCAMBIO + CAMBIO.padStart(cambioPad));
     }
 
     await this.row('\n\n');
