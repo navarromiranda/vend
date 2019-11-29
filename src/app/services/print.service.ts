@@ -24,8 +24,8 @@ export class PrintService {
       .catch(() => { })
   }
 
-  async print(ticket: Map<string, ITicketrow>, date: Date = new Date) {
-    const fecha = date.toLocaleString().replace(/-/gi, '/').substring(0, 16)
+  async print(ticket: Map<string, ITicketrow>, date: Date, pago: number) {
+    const fecha = date.toLocaleString('es-MX').replace(/-/gi, '/').substring(0, 16)
     await this.row(`${fecha}  Dulcerias N/M`)
     await this.row('')
 
@@ -74,6 +74,18 @@ export class PrintService {
 
     await this.row(''.padEnd(piezasPad, '_') + ''.padEnd(TOTALPad) + ''.padEnd(total.length, '_'));
     await this.row(`${piezas.padStart(piezasPad)}${TOTAL}${total}`);
+
+    if (Number(pago) > Number(total)) {
+      const pagoPad = pago.toFixed(totalDecimals).length;
+      const TUPAGOPad = 31 - piezasPad - pagoPad;
+      const TUPAGO = this.pad('TU PAGO:', TUPAGOPad)
+
+      await this.row(`${piezas.padStart(piezasPad)}${TUPAGO}${pago.toFixed(totalDecimals)}`);
+      await this.row(''.padEnd(piezasPad, '_') + ''.padEnd(TUPAGOPad) + ''.padEnd(pago.toFixed(totalDecimals).length, '_'));
+
+      await this.row(`${piezas.padStart(piezasPad)} CAMBIO:${(pago - Number(total)).toFixed(totalDecimals)}`);
+    }
+
     await this.row('\n\n');
   }
 

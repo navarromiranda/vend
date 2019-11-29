@@ -16,6 +16,7 @@ export class PrintModalPage implements OnInit {
   pago: number;
   printed: boolean = false;
   printer: string = localStorage.getItem('printer');
+  date: Date = new Date
   constructor(
     public modalCtrl: ModalController,
     public Tickets: TicketsService,
@@ -39,7 +40,7 @@ export class PrintModalPage implements OnInit {
     this.printed = true;
     this.Print
       .connect(printer as IPrinter)
-      .subscribe(() => this.Print.print(this.Tickets.newTicket))
+      .subscribe(() => this.Print.print(this.Tickets.newTicket, this.date, this.pago))
   }
 
   onPrinterSelection() {
