@@ -13,7 +13,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-list lines="none" no-padding>
+  <ion-list lines="none" class="ion-no-padding">
     <ion-item-sliding *ngFor="let row of Tickets.newTicket.values(); index as i">
       <ion-item [color]="i % 2 === 0 ? 'medium': 'ligth'" button (click)="plusOne(row.prod)">
         <ion-text slot="start" (click)="minusOne(row.prod)">
@@ -47,7 +47,7 @@
 
 <ion-footer>
   <ion-toolbar color="dark" *ngIf="searchTerm && searchTerm.length >= 4 && filteredItems.length > 0">
-    <ion-list no-padding>
+    <ion-list class="ion-no-padding">
       <ion-item color="dark" *ngFor="let item of filteredItems.slice(0,5)" (click)="prodClicked(item)">
         <ion-label>
           <h3>{{ item.descrip }}</h3>

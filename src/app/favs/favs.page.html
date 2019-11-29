@@ -23,13 +23,13 @@
   <ion-grid>
     <ion-row align-items-center>
       <ion-col *ngFor="let prod of prodsByBrand(prods[tag], brand)">
-        <ion-card (click)=prodClicked(prod) no-margin>
+        <ion-card (click)=prodClicked(prod) class="ion-no-margin">
 
-          <ion-item lines="none" color="light" no-pading no-margin>
-            <ion-text color="dark" no-pading no-margin>
-              <h3 color="primary" no-pading no-margin>{{prod.precio | number:'1.2-2'}}</h3>
+          <ion-item lines="none" color="light" no-pading class="ion-no-margin">
+            <ion-text color="dark" no-pading class="ion-no-margin">
+              <h3 color="primary" no-pading class="ion-no-margin">{{prod.precio | number:'1.2-2'}}</h3>
             </ion-text>
-            <ion-badge slot="end" color="warning" no-pading no-margin>{{Tickets.getProdQtyOnTicket(prod)}}</ion-badge>
+            <ion-badge slot="end" color="warning" no-pading class="ion-no-margin">{{Tickets.getProdQtyOnTicket(prod)}}</ion-badge>
           </ion-item>
 
           <ion-card-content>{{prod.descrip}} </ion-card-content>
