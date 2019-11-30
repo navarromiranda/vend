@@ -67,12 +67,11 @@ export class PrintService {
       await this.row(`${qty} ${descripcion}${Number(qty) === 1 ? '' : ' ' + precio} ${subtotal}`)
     }
 
-    // ____                 __________
     // ####     TOTALES     #######.##
     const TOTALPad = 31 - piezasPad - total.length;
     const TOTAL = this.pad('TOTALES', TOTALPad)
 
-    await this.row(''.padEnd(piezasPad, '_') + ''.padEnd(TOTALPad) + ''.padEnd(total.length, '_'));
+    await this.row('');
     await this.row(`${piezas.padStart(piezasPad)}${TOTAL}${total}`);
 
     if (Number(pago) > Number(total)) {
