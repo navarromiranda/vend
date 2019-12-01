@@ -4,7 +4,9 @@ import { ITicketrow } from 'src/app/models/ITicketrow';
 import { IPrinter } from 'src/app/models/printer';
 import { PrintService } from 'src/app/services/print.service';
 import { TicketsService } from 'src/app/services/tickets.service';
-import { v4 as uuid } from 'uuid';
+import { v4 as UUID } from 'uuid';
+import { tick } from '@angular/core/testing';
+import { ITicketWithMeta } from 'src/app/models/ITicketWithMeta';
 
 @Component({
   selector: 'app-print-modal',
@@ -37,11 +39,23 @@ export class PrintModalPage implements OnInit {
   }
 
   print() {
+    const tickets = new Map<string, any>(JSON.parse(localStorage.getItem('tickets')) || [])
+    const uuid = UUID()
+
+    tickets.set(uuid, {
+      date: this.date,
+      pago: this.pago,
+      ticket: [...this.Tickets.newTicket]
+    })
+
+    // const deepMapString = JSON.stringify([...tickets].map(t => [t[0], { ...t[1], ticket: [...t[1].ticket] }]))
+    localStorage.setItem('tickets', JSON.stringify([...tickets]))
+
     const printer = { address: this.printer };
     this.printed = true;
     this.Print
       .connect(printer as IPrinter)
-      .subscribe(() => this.Print.print(this.Tickets.newTicket, this.date, this.pago, uuid()))
+      .subscribe(() => this.Print.print(this.Tickets.newTicket, this.date, this.pago, uuid))
   }
 
   onPrinterSelection() {

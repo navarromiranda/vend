@@ -6,4 +6,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let ticket of tickets | keyvalue">
+      <ion-card-header>
+        <ion-card-subtitle>{{ticket.key}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Artículos</ion-label>
+            {{  Tickets.getNewTicketQty(ticket.value.ticket)  }}
+          </ion-item>
+          <ion-item>
+            <ion-label>Total</ion-label>
+            {{  Tickets.getNewTicketTotal(ticket.value.ticket)  }}
+          </ion-item>
+          <ion-item>
+            <ion-label>Pagado</ion-label>
+            {{  ticket.value.pago  }}
+          </ion-item>
+          <ion-item>
+            <ion-label>Cambio</ion-label>
+            {{  ticket.value.pago -  Tickets.getNewTicketTotal(ticket.value.ticket)  }}
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

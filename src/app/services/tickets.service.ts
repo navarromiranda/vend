@@ -31,18 +31,18 @@ export class TicketsService {
     this.newTicket.delete(key);
   }
 
-  getNewTicketQty(): number {
+  getNewTicketQty(ticket?: Map<string, ITicketrow>): number {
     let qty = 0;
-    this.newTicket.forEach(row => {
+    (ticket || this.newTicket).forEach(row => {
       qty += row.qty;
     });
 
     return qty;
   }
 
-  getNewTicketTotal(): number {
+  getNewTicketTotal(ticket?: Map<string, ITicketrow>): number {
     let total = 0;
-    this.newTicket.forEach(row => {
+    (ticket || this.newTicket).forEach(row => {
       total += (row.qty * row.prod.precio);
     });
 
