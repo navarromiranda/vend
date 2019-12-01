@@ -38,7 +38,7 @@ export class PrintService {
 
     doc.push(this.pad('Dulcerias N/M', 31))
     doc.push(this.pad('Francisco I. Madero 35', 31))
-    doc.push('\n\n')
+    doc.push('')
 
     const rows = Array.from(ticket.values())
       .map(({ prod, qty }) => ({
@@ -94,8 +94,8 @@ export class PrintService {
     doc.push(fecha.padStart(31, '     FECHA'.padEnd(31)))
     doc.push(uuid.substring(0, 18).padStart(31, '    TICKET'.padEnd(31)))
 
-    doc.push('\n\n');
-    doc.push('Gracias por tu compra');
+    doc.push('');
+    doc.push(this.pad('Gracias por tu compra', 31));
     doc.push('\n\n');
 
     return doc.join('\n');
