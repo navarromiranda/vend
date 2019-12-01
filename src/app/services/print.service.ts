@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
-import { IPrinter } from '../models/printer';
+import * as moment from 'moment';
 import { ITicketrow } from '../models/ITicketrow';
-
+import { IPrinter } from '../models/printer';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +24,12 @@ export class PrintService {
       .catch(() => { })
   }
 
-  async print(ticket: Map<string, ITicketrow>, date: Date, pago: number) {
-    const fecha = date.toLocaleString('es-MX').replace(/-/gi, '/').substring(0, 16)
-    await this.row(`${fecha}  Dulcerias N/M`)
-    await this.row('')
+  async print(ticket: Map<string, ITicketrow>, date: Date, pago: number, uuid: string) {
+    const fecha = moment(date).format('YYYY/MM/DD HH:mm')
+
+    await this.row(this.pad('Dulcerias N/M', 31))
+    await this.row(this.pad('Francisco I. Madero 35', 31))
+    await this.row('\n\n')
 
     const rows = Array.from(ticket.values())
       .map(({ prod, qty }) => ({
@@ -67,29 +69,26 @@ export class PrintService {
       await this.row(`${qty} ${descripcion}${Number(qty) === 1 ? '' : ' ' + precio} ${subtotal}`)
     }
 
-    // ####     TOTALES     #######.##
-    const TOTALPad = 31 - piezasPad - total.length;
-    const TOTAL = this.pad('TOTALES', TOTALPad)
-
-    await this.row('');
-    await this.row(`${piezas.padStart(piezasPad)}${TOTAL}${total}`);
+    await this.row('')
+    await this.row(piezas.padStart(31, '    PIEZAS'.padEnd(31)))
+    await this.row(total.padStart(31, '     TOTAL'.padEnd(31)))
 
     if (Number(pago) > Number(total)) {
       const PAGO = pago.toFixed(totalDecimals)
       const CAMBIO = (pago - Number(total)).toFixed(totalDecimals)
 
-      const cambioPad = Math.max(PAGO.length, CAMBIO.length)
-
-      const TUPAGO = this.pad('TU PAGO:', 31 - cambioPad)
-      const TUCAMBIO = this.pad(' CAMBIO:', 31 - cambioPad)
-
-      await this.row('');
-      await this.row(TUPAGO + PAGO.padStart(cambioPad));
-      await this.row(TUCAMBIO + CAMBIO.padStart(cambioPad));
+      await this.row(PAGO.padStart(31, '  EFECTIVO'.padEnd(31)))
+      await this.row(CAMBIO.padStart(31, '    CAMBIO'.padEnd(31)))
     }
 
+    await this.row('')
+    await this.row(fecha.padStart(31, '     FECHA'.padEnd(31)))
+    await this.row(uuid.substring(0, 18).padStart(31, '    TICKET'.padEnd(31)))
+
+    await this.row('\n\n');
+    await this.row('Gracias por tu compra');
     await this.row('\n\n');
   }
 
-  private pad = (s, l, c = ' ') => s.padStart((s.length + l) / 2, c).padEnd(l, c);
+  private pad = (s: string, l: number, c: string = ' ') => s.padStart((s.length + l) / 2, c).padEnd(l, c);
 }

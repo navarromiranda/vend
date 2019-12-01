@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ITicketrow } from 'src/app/models/ITicketrow';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { TicketsService } from 'src/app/services/tickets.service';
-import { PrintService } from 'src/app/services/print.service';
+import { ITicketrow } from 'src/app/models/ITicketrow';
 import { IPrinter } from 'src/app/models/printer';
+import { PrintService } from 'src/app/services/print.service';
+import { TicketsService } from 'src/app/services/tickets.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-print-modal',
@@ -40,7 +41,7 @@ export class PrintModalPage implements OnInit {
     this.printed = true;
     this.Print
       .connect(printer as IPrinter)
-      .subscribe(() => this.Print.print(this.Tickets.newTicket, this.date, this.pago))
+      .subscribe(() => this.Print.print(this.Tickets.newTicket, this.date, this.pago, uuid()))
   }
 
   onPrinterSelection() {
