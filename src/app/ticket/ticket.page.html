@@ -46,7 +46,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="dark" *ngIf="searchTerm && searchTerm.length >= 4 && filteredItems.length > 0">
+  <ion-toolbar color="dark" *ngIf="searchTerm && searchTerm.length >= 1 && filteredItems.length > 0">
     <ion-list class="ion-no-padding">
       <ion-item color="dark" *ngFor="let item of filteredItems.slice(0,5)" (click)="prodClicked(item)">
         <ion-label>
