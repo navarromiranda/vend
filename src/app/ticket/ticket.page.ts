@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { v4 as UUID } from 'uuid';
 import { Prod } from '../models/prod';
 import { ProdsService } from '../services/prods.service';
 import { TicketsService } from '../services/tickets.service';
 import { PrintModalPage } from './print-modal/print-modal.page';
-
 
 @Component({
   selector: 'app-ticket',
@@ -25,6 +25,8 @@ export class TicketPage implements OnInit {
     const modal = await this.Modal.create({
       component: PrintModalPage,
       componentProps: {
+        uuid: UUID(),
+        date: new Date,
         ticket: this.Tickets.newTicket
       }
     });
