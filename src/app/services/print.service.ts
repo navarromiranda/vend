@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
-import * as moment from 'moment';
+import * as moment from 'moment/min/moment.min.js';
 import { ITicketrow } from '../models/ITicketrow';
 import { IPrinter } from '../models/printer';
 
