@@ -45,11 +45,11 @@ export class PrintModalPage implements OnInit {
     tickets.set(uuid, {
       date: this.date,
       pago: this.pago,
-      ticket: [...this.Tickets.newTicket]
+      ticket: Array.from(this.Tickets.newTicket)
     })
 
     // const deepMapString = JSON.stringify([...tickets].map(t => [t[0], { ...t[1], ticket: [...t[1].ticket] }]))
-    localStorage.setItem('tickets', JSON.stringify([...tickets]))
+    localStorage.setItem('tickets', JSON.stringify(Array.from(tickets)))
 
     const printer = { address: this.printer };
     this.printed = true;
