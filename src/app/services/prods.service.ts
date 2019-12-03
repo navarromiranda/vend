@@ -23,12 +23,13 @@ export class ProdsService {
 
   load(): Observable<Prod[]> {
 
-    const httpProds = this.http
+    this.http
       .get<{ found: Number, prods: Prod[] }>(`${env.api.url}/prods`, {
         headers: { Authorization: `Bearer ${env.api.tokens.prods}` }
       })
       .pipe(map(this.process, this))
-      .subscribe(_prods => {
+      .subscribe(prods => {
+        const _prods = prods.filter(({ precio }) => precio > 0);
         localStorage.setItem('prods', JSON.stringify(_prods));
         this.prods = _prods.sort((a, b) => a.descrip.length - b.descrip.length);
       });
